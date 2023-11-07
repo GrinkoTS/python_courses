@@ -48,46 +48,34 @@ print('Ответ для задачи №3', '\n')
 
 import json
 
-#считываем csv файл и записываю его в виде списка
-with open('test.csv', 'r') as csv_test:
-    csv_reader = csv.reader(csv_test, delimiter=',')
-    csv_tf = []
-    for row in csv_reader:
-        csv_tf.append(row)
-#создаю итоговый список
-test_itog = []
+WORK_FILE = 'test.csv'
 
-#выбираю из списка искомые ключи словаря
-first_name = csv_tf.pop(0)
+def csv_to_list_dict(filename: str, delimiter: str = ",") -> list[dict]:
+    #открываем файл
+    with open(filename) as f:
+        #построчно считываем его, сразу убирая знак переноса
+        csv_reader = f.readline()[:-1]
+        #первую строчку преобразуем в список слов для заголовка
+        csv_file = csv_reader.split(delimiter)
+        print(csv_file)
 
-#прохожусь по оставшемуся списку из полученого csv файла
-for i in range(len(csv_tf)):
-    #добавляю словарь, в который буду вносить данные
-    dict_test = {}
-    #добавляю счетчик для выборки значений
-    j = 0
-    #достаю ключи из first_name и заношу в значение элементы из нашего списка
-    for key in first_name:
-        dict_test[key] = csv_tf[i][j]
-        j += 1
-    #добавляю словарь в итоговый список
-    test_itog.append(dict_test)
+        csv_tf = []
+        for row in f:
+            row = row[:-1]
+            #остальные строчки преобразуем в список слов и соединяем с заголовками
+            row_values = row.split(delimiter)
+            csv_tf.append(dict(zip(csv_file, row_values)))
 
+    return csv_tf
+
+print(json.dumps(csv_to_list_dict(WORK_FILE), indent=4))
+
+
+test_itog = csv_to_list_dict(WORK_FILE)
 
 with open('test_string.json', 'w') as json_file:
-    for elem in test_itog:
-        json.dump(elem, json_file)
-        print(json.dumps(elem), '\t')
+    json.dump(test_itog, json_file)
 
-
-
-with open('test_string.json') as f:
-    data = json.load(f)
-print(data, type(data))
-
-f = open('test_string.json')
-data = f.read()
-print(data, type(data))
 print('_' * 100)
 
 '''Задача 4. Создайте текстовый файл с абзацем текста (абсолютно любого, 
