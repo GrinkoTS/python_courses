@@ -1,4 +1,13 @@
 Name,Age,City
+<<<<<<< HEAD
 John,30,New York
 Alice,25,London
 Bob,35,Paris
+=======
+
+John,30,New York
+
+Alice,25,London
+
+Bob,35,Paris
+>>>>>>> 1c3aca1 (Добавила файл с обработкой .xlsx файлов)

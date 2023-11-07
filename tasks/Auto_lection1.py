@@ -3,6 +3,7 @@
 В нем каждая строка с помощью символа табуляции \t разделена на три колонки:
 наименование товара; количество товара (целое число); цена (в рублях) товара за 1 шт. (целое число).
 Напишите программу, преобразующую данные из txt в csv'''
+
 print('Ответ для задачи №1')
 import csv
 
@@ -70,7 +71,10 @@ def csv_to_list_dict(filename: str, delimiter: str = ",") -> list[dict]:
 
 print(json.dumps(csv_to_list_dict(WORK_FILE), indent=4))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1c3aca1 (Добавила файл с обработкой .xlsx файлов)
 test_itog = csv_to_list_dict(WORK_FILE)
 
 with open('test_string.json', 'w') as json_file:
